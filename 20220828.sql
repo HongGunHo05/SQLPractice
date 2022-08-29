@@ -737,9 +737,73 @@ FROM
     c_empall
 WHERE
     job NOT IN ( 'MANAGER', 'manager' );
-    
-select empno 사원번호, ename 이름, sal 급여함
-from emp
+
+SELECT
+    empno 사원번호,
+    ename 이름,
+    sal   급여함
+FROM
+    emp
 -- where ename = 'FORD';
 -- where 이름 = 'FORD'; -- 별칭으로 조건 안됨
-order by 급여 desc; -- 정렬은 별칭으로 가능
+ORDER BY
+    급여함 DESC; -- 정렬은 별칭으로 가능
+
+-- 문제 1번 c_emp_20, c_emp4 union 결과?
+SELECT
+    *
+FROM
+    c_emp_20
+UNION
+SELECT
+    *
+FROM
+    c_emp4;
+
+-- 문제 2번 사원번호, 이름, 급여 그리고 15% 인상된 급여를 정수로 표시하되
+-- 컬럼명을 New Salary로 지정하여 출력하라
+
+SELECT
+    empno,
+    ename,
+    sal,
+    round(sal * 1.15, 0) AS "New Salary"
+FROM
+    emp;
+
+-- 문제 3번 2번 문제와 동일한 데이터에서 급여 인상분 ( 새 급여에서 이전 급여를 뺀 값)을 추가해서
+-- 출력하라 (컬럼명은 Increase로 하라)
+
+SELECT
+    empno,
+    ename,
+    sal,
+    round(sal * 1.15, 0) AS "New Salary",
+    round(sal * 0.15, 0) AS "Increase"
+FROM
+    emp;
+
+-- 문제 4번 각 사원의 이름을 표시하고 근무 달 수를 계산하여 컬럼명을
+-- Months_Works로 지정하고, 근무 달 수를 기준을 오래된 사람부터 정렬하여 출력하라.
+SELECT
+    *
+FROM
+    emp;
+
+SELECT
+    ename,
+    round(months_between(sysdate, hiredate),
+          0) AS "Months_Works"
+FROM
+    emp
+ORDER BY
+    "Months_Works" DESC;
+
+-- 문제 5번 사원의 이름과 커미션을 출력하되, 커미션이 책정되지 않은 사원의 커미션은
+-- 'no commission'으로 출력하라
+SELECT
+    ename,
+    nvl(to_char(comm),
+        'no commission') AS comm
+FROM
+    emp;
