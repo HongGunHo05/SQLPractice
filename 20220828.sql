@@ -737,14 +737,9 @@ FROM
     c_empall
 WHERE
     job NOT IN ( 'MANAGER', 'manager' );
-
-SELECT
-    empno 사원번호,
-    ename 이름,
-    sal   급여
-FROM
-    emp
+    
+select empno 사원번호, ename 이름, sal 급여함
+from emp
 -- where ename = 'FORD';
 -- where 이름 = 'FORD'; -- 별칭으로 조건 안됨
-ORDER BY
-    급여 DESC; -- 정렬은 별칭으로 가능하다 
+order by 급여 desc; -- 정렬은 별칭으로 가능
