@@ -724,6 +724,8 @@ FROM
     dept2;
     
 ------------------------------------------------
-select concat(name , position)||'님' "교수님"
-from professor;
-
+SELECT
+    concat(name, position)
+    || '님' "교수님"
+FROM
+    professor;
